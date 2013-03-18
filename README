@@ -1,2 +1,9 @@
-#Yooo! This is my first repo ever. WElcome to the Git!
-# This repo will have mostly ddwrt based scripts as I use my router as my main server Cheers people!
+Yooo! This is my first repo ever. WElcome to the Git!
+This repo will have mostly ddwrt based scripts as I use my router as my main server Cheers people!
+
+I have just added two old scripts I have written to my repo.
+
+The first is simple one liner using ps and grabbing the cpu line and adding them for a total cpu usage.
+
+The second is a cron based script to look for ip of areas i connect from that get blocked by the built in stop hammer script.
+The stophammer script checks the log files for address doing port scans and blocks them.
