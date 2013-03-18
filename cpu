@@ -1,0 +1,3 @@
+#!/opt/bin/bash
+echo -n "Current CPU usage: "
+ps aux | tr -s ' ' | cut -d ' ' -f 3 | tr -d CPU% | awk '{total += $1}END{print total}'

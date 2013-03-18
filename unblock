@@ -1,0 +1,35 @@
+#!/bin/sh
+
+########################################################################################################################
+# Script written to remove ILT from firewall drop rule, which was being placed by stophammer scan port blocking script.#
+#  Written by: Aemilianus Kehler                                                                                       #
+#  Date: Mar 5, 2013                                                                                                   #
+#  Written for: DDWRT                                                                                                  #
+#  Source: Open GNU                                                                                                    #
+########################################################################################################################
+
+IPs="74.113.68.178
+74.113.68.173
+206.220.196.50
+206.220.196.54
+206.45.1.45
+"
+iptables -nvL nologdrop > /dev/null
+if [ $? -eq 0 ]
+then
+        printf %s "$IPs" | while IFS= read -r line
+        do
+                iptables -nvL nologdrop | grep "$line" > /dev/null
+                if [ $? -eq 0 ]
+                then
+                        echo "Internet address $line located in drop table, removing now"
+                        iptables -D nologdrop -s $line -j DROP
+                else
+                        echo "$line not found in list"
+                fi
+        done
+else
+        echo "nologdrop does not exist in iptables, exiting."
+        #The list does not exist exiting script
+        exit 1
+fi
