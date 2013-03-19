@@ -1,0 +1,18 @@
+#!/bin/sh
+#This script was written to correct cron sleeping in ddwrt v24 distros
+
+ps aux | grep [c]ron > /dev/null
+check () {
+if [ $? -eq 1 ]
+then
+	startservice cron
+else
+	echo "Cron is still active as of `date`" >> /mnt/log/cron.log
+fi
+
+sleep 60
+
+check
+}
+
+check
